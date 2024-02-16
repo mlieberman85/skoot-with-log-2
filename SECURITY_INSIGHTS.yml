@@ -1,0 +1,18 @@
+contribution-policy:
+  accepts-automated-pull-requests: true
+  accepts-pull-requests: true
+distribution-points: []
+header:
+  expiration-date: 2025-02-15T18:48:13.590902705Z
+  last-reviewed: 2024-02-16T18:48:13.590905810Z
+  last-updated: 2024-02-16T18:48:13.590906021Z
+  license: https://github.com/mlieberman85/skoot-with-log-2/blob/main/LICENSE
+  project-url: https://github.com/mlieberman85/skoot-with-log-2
+  schema-version: 1.0.0
+project-lifecycle:
+  bug-fixes-only: false
+  status: active
+security-contacts: []
+vulnerability-reporting:
+  accepts-vulnerability-reports: true
+  security-policy: https://github.com/mlieberman85/skoot-with-log-2/blob/main/SECURITY.md
