@@ -132,8 +132,7 @@ jobs:
         run: |
           #!/usr/bin/env bash
           set -euo pipefail
-          cosign attach sbom --sbom spdx.sbom.json ${IMAGE_URI_DIGEST}
-          cosign sign -a git_sha=$GITHUB_SHA --attachment sbom ${IMAGE_URI_DIGEST} --yes
+          cosign attest --predicate spdx.sbom.json ${IMAGE_URI_DIGEST}
         shell: bash
         env:
           IMAGE_URI_DIGEST: ${{ needs.goreleaser.outputs.image }}@${{ needs.goreleaser.outputs.digest }}
