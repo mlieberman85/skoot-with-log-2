@@ -59,7 +59,7 @@ before:
     - go generate ./...
 
 builds:
-  - main: ./main
+  - main: ./
     id: main
     binary: main-{{ .Os }}-{{ .Arch }}
     ldflags:
