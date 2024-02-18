@@ -1,9 +1,9 @@
 ---
-project_name: guac
+project_name: skoot-with-log-2
 
 env:
   - CGO_ENABLED=0
-  - PKG=github.com/guacsec/guac/pkg/version
+  - PKG=github.com/mlieberman85/skoot-with-log-2
 
 dockers:
   # see details at https://goreleaser.com/customization/docker/
@@ -59,9 +59,9 @@ before:
     - go generate ./...
 
 builds:
-  - main: ./cmd/guaccollect
-    id: guaccollect
-    binary: guaccollect-{{ .Os }}-{{ .Arch }}
+  - main: ./main
+    id: main
+    binary: main-{{ .Os }}-{{ .Arch }}
     ldflags:
       # See https://goreleaser.com/customization/templates/#common-fields for field definitions
       - -X {{.Env.PKG}}.Commit={{.FullCommit}}
@@ -77,118 +77,13 @@ builds:
         goarch: arm64
       - goos: windows
         goarch: arm
-  - main: ./cmd/guaccsub
-    id: guaccsub
-    binary: guaccsub-{{ .Os }}-{{ .Arch }}
-    ldflags:
-      - -X {{.Env.PKG}}.Commit={{.FullCommit}}
-      - -X {{.Env.PKG}}.Date={{.Date}}
-      - -X {{.Env.PKG}}.Version={{.Summary}}
-    goos: [ 'darwin', 'linux', 'windows' ]
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-      - goos: windows
-        goarch: arm64
-      - goos: windows
-        goarch: arm
-  - main: ./cmd/guacgql
-    id: guacgql
-    binary: guacgql-{{ .Os }}-{{ .Arch }}
-    ldflags:
-      - -X {{.Env.PKG}}.Commit={{.FullCommit}}
-      - -X {{.Env.PKG}}.Date={{.Date}}
-      - -X {{.Env.PKG}}.Version={{.Summary}}
-    goos: [ 'darwin', 'linux', 'windows' ]
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-      - goos: windows
-        goarch: arm64
-      - goos: windows
-        goarch: arm
-  - main: ./cmd/guacingest
-    id: guacingest
-    binary: guacingest-{{ .Os }}-{{ .Arch }}
-    ldflags:
-      - -X {{.Env.PKG}}.Commit={{.FullCommit}}
-      - -X {{.Env.PKG}}.Date={{.Date}}
-      - -X {{.Env.PKG}}.Version={{.Summary}}
-    goos: [ 'darwin', 'linux', 'windows' ]
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-      - goos: windows
-        goarch: arm64
-      - goos: windows
-        goarch: arm
-  - main: ./cmd/guacone
-    id: guacone
-    binary: guacone-{{ .Os }}-{{ .Arch }}
-    ldflags:
-      - -X {{.Env.PKG}}.Commit={{.FullCommit}}
-      - -X {{.Env.PKG}}.Date={{.Date}}
-      - -X {{.Env.PKG}}.Version={{.Summary}}
-    goos: [ 'darwin', 'linux', 'windows' ]
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-      - goos: windows
-        goarch: arm64
-      - goos: windows
-        goarch: arm
-  - main: ./cmd/guacrest
-    id: guacrest
-    binary: guacrest-{{ .Os }}-{{ .Arch }}
-    ldflags:
-      - -X {{.Env.PKG}}.Commit={{.FullCommit}}
-      - -X {{.Env.PKG}}.Date={{.Date}}
-      - -X {{.Env.PKG}}.Version={{.Summary}}
-    goos: [ 'darwin', 'linux', 'windows' ]
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-    - goos: windows
-      goarch: arm64
-    - goos: windows
-      goarch: arm
 
 universal_binaries:
   - replace: true
-    name_template: guacone
-    id: guacone
+    name_template: main
+    id: main
     ids:
-      - guacone
-  - replace: true
-    name_template: guacingest
-    id: guacingest
-    ids:
-      - guacingest
-  - replace: true
-    name_template: guaccsub
-    id: guaccsub
-    ids:
-      - guaccsub
-  - replace: true
-    name_template: guaccollect
-    id: guaccollect
-    ids:
-      - guaccollect
-  - replace: true
-    name_template: guacgql
-    id: guacgql
-    ids:
-      - guacgql
+      - main
 
 sboms:
   - id: bins
@@ -197,7 +92,7 @@ sboms:
       - "${artifact}.spdx.sbom.json"
 
 signs:
-  - id: guac-cosign-keyless
+  - id: skoot-with-log-2-cosign-keyless
     artifacts: checksum
     signature: "${artifact}-keyless.sig"
     certificate: "${artifact}-keyless.pem"
